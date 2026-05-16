@@ -14,10 +14,10 @@
 
 ```
 ╔══════════════════════════════════════════════╗
-║   🚨 LaporScam.my — Python Flask            ║
-║   🌐 http://0.0.0.0:3000                    ║
-║   📁 DB  : data/scammer_reports.db          ║
-║   📂 Uploads: ./uploads/                    ║
+║   🚨 LaporScam.my — Python Flask                     ║
+║   🌐 http://0.0.0.0:3000                             ║
+║   📁 DB  : data/scammer_reports.db                   ║
+║   📂 Uploads: ./uploads/                             ║
 ╚══════════════════════════════════════════════╝
 ```
 
