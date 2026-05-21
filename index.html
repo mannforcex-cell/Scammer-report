@@ -2,11 +2,15 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>LaporScam.my — Laporkan Nombor Scammer Malaysia</title>
-  <meta name="description" content="Platform awam percuma untuk melaporkan nombor telefon scammer Malaysia. Bersama lindungi masyarakat."/>
+  <meta name="description" content="Platform awam percuma untuk melaporkan nombor telefon scammer Malaysia."/>
   <meta name="theme-color" content="#0A0A0C"/>
-  <!-- Open Graph untuk sharing link -->
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="LaporScam"/>
+  <meta name="format-detection" content="telephone=no"/>
   <meta property="og:title" content="LaporScam.my — Laporkan Scammer"/>
   <meta property="og:description" content="Platform awam untuk melaporkan dan menyemak nombor telefon scammer di Malaysia."/>
   <meta property="og:type" content="website"/>
@@ -16,9 +20,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
 
 <style>
-/* ═══════════════════════════════════════════
-   RESET & CSS VARIABLES
-═══════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
@@ -27,137 +28,87 @@
   --bg:#09090C;--bg2:#111116;--bg3:#18181F;
   --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.13);
   --text:#F0EEF5;--muted:#706e82;--muted2:#A8A4BE;
-  --card:#13131A;
-  --r:14px;--rs:8px;
+  --card:#13131A;--r:14px;--rs:10px;
   --fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;
-  --sdw:0 4px 24px rgba(0,0,0,.55);
   --sdw-r:0 4px 32px rgba(232,39,43,.28);
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bot:env(safe-area-inset-bottom,0px);
 }
 
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   background:var(--bg);color:var(--text);
   font-family:var(--fb);font-size:15px;line-height:1.65;
   min-height:100vh;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:var(--safe-bot);
 }
-
-/* Gradient mesh bg */
 body::before{
   content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
     radial-gradient(ellipse 90% 55% at 10% -5%,rgba(232,39,43,.13) 0%,transparent 65%),
-    radial-gradient(ellipse 55% 45% at 90% 105%,rgba(232,39,43,.08) 0%,transparent 65%),
-    radial-gradient(ellipse 40% 30% at 50% 50%,rgba(232,39,43,.03) 0%,transparent 80%);
+    radial-gradient(ellipse 55% 45% at 90% 105%,rgba(232,39,43,.08) 0%,transparent 65%);
 }
-
-/* Scrollbar */
-::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--bg2)}
 ::-webkit-scrollbar-thumb{background:var(--red-dk);border-radius:99px}
 
-/* ═══════════════════════════════════════════
-   LAYOUT
-═══════════════════════════════════════════ */
-.wrap{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:0 16px 72px}
+.wrap{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:0 14px 80px}
 
-/* ═══════════════════════════════════════════
-   HEADER
-═══════════════════════════════════════════ */
-header{text-align:center;padding:52px 0 36px;position:relative}
-
+/* ── Header ── */
+header{text-align:center;padding:48px 0 32px}
 .live-badge{
   display:inline-flex;align-items:center;gap:9px;
   background:rgba(232,39,43,.1);border:1px solid rgba(232,39,43,.28);
   padding:7px 18px;border-radius:99px;
-  font-size:11.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
-  color:#ff7577;margin-bottom:22px;
-  animation:fadeD .5s ease both;
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:#ff7577;margin-bottom:20px;animation:fadeD .5s ease both;
 }
-.live-badge .dot{
-  width:7px;height:7px;border-radius:50%;background:var(--red);
-  animation:blink 1.8s ease infinite;
-}
+.live-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.8s ease infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3;transform:scale(.7)}}
-
-h1{
-  font-family:var(--fh);font-size:clamp(1.9rem,7vw,3.5rem);
-  font-weight:800;line-height:1.08;letter-spacing:-.025em;
-  margin-bottom:14px;animation:fadeD .55s .08s ease both;
-}
+h1{font-family:var(--fh);font-size:clamp(1.9rem,8vw,3.5rem);font-weight:800;line-height:1.08;letter-spacing:-.025em;margin-bottom:14px;animation:fadeD .55s .08s ease both}
 h1 span{color:var(--red)}
-
-.hero-sub{
-  color:var(--muted2);font-size:15.5px;max-width:510px;
-  margin:0 auto 30px;font-weight:300;
-  animation:fadeD .55s .16s ease both;
-}
-
-/* Stats pills */
-.stats{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:44px;animation:fadeD .55s .24s ease both}
-.pill{
-  background:var(--card);border:1px solid var(--border);border-radius:99px;
-  padding:7px 18px;font-size:12.5px;color:var(--muted2);
-  display:flex;align-items:center;gap:8px;
-}
+.hero-sub{color:var(--muted2);font-size:15px;max-width:500px;margin:0 auto 28px;font-weight:300;animation:fadeD .55s .16s ease both}
+.stats{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-bottom:40px;animation:fadeD .55s .24s ease both}
+.pill{background:var(--card);border:1px solid var(--border);border-radius:99px;padding:7px 16px;font-size:12.5px;color:var(--muted2);display:flex;align-items:center;gap:7px;-webkit-tap-highlight-color:transparent}
 .pill strong{color:var(--text);font-weight:600}
 
-/* ═══════════════════════════════════════════
-   TAB NAV
-═══════════════════════════════════════════ */
+/* ── Tabs sticky ── */
 .tabs{
-  display:flex;gap:4px;background:var(--bg3);
+  display:flex;gap:3px;background:rgba(24,24,31,.85);
   border:1px solid var(--border);border-radius:var(--r);
-  padding:5px;margin-bottom:26px;animation:fadeU .5s .3s ease both;
+  padding:4px;margin-bottom:22px;animation:fadeU .5s .3s ease both;
+  position:sticky;top:8px;z-index:100;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
 }
 .t-btn{
   flex:1;background:none;border:none;color:var(--muted);
-  font-family:var(--fb);font-size:13px;font-weight:500;
-  padding:10px 8px;border-radius:calc(var(--r) - 4px);
+  font-family:var(--fb);font-size:12.5px;font-weight:500;
+  padding:10px 6px;border-radius:calc(var(--r) - 4px);
   cursor:pointer;transition:all .18s;
-  display:flex;align-items:center;justify-content:center;gap:6px;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;min-height:44px;
 }
 .t-btn:hover{color:var(--text);background:rgba(255,255,255,.06)}
 .t-btn.on{background:var(--red);color:#fff;box-shadow:var(--sdw-r)}
 
-/* ═══════════════════════════════════════════
-   PANELS
-═══════════════════════════════════════════ */
 .panel{display:none}
 .panel.on{display:block;animation:fadeU .35s ease both}
-
 @keyframes fadeD{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeU{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
-/* ═══════════════════════════════════════════
-   CARD
-═══════════════════════════════════════════ */
-.card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r);padding:26px;margin-bottom:18px;
-  position:relative;overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--red) 0%,transparent 70%);opacity:.55;
-}
-.card-h{
-  font-family:var(--fh);font-size:17px;font-weight:700;
-  margin-bottom:18px;display:flex;align-items:center;gap:10px;
-}
-.card-h .ico{
-  width:33px;height:33px;border-radius:var(--rs);
-  background:rgba(232,39,43,.13);display:flex;align-items:center;justify-content:center;font-size:16px;
-}
+/* ── Card ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:16px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red) 0%,transparent 70%);opacity:.55}
+.card-h{font-family:var(--fh);font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.card-h .ico{width:32px;height:32px;border-radius:var(--rs);background:rgba(232,39,43,.13);display:flex;align-items:center;justify-content:center;font-size:15px}
 
-/* ═══════════════════════════════════════════
-   FORM
-═══════════════════════════════════════════ */
-.fg{display:flex;flex-direction:column;gap:7px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+/* ── Form ── */
+.fg{display:flex;flex-direction:column;gap:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
 .grid .full{grid-column:1/-1}
-@media(max-width:560px){.grid{grid-template-columns:1fr}}
-
-label{font-size:12.5px;font-weight:500;color:var(--muted2);letter-spacing:.02em}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+label{font-size:12px;font-weight:500;color:var(--muted2);letter-spacing:.02em}
 label .req{color:var(--red);margin-left:2px}
 label .opt{color:var(--muted);font-size:11px;margin-left:4px;font-weight:400}
 
@@ -165,171 +116,141 @@ input[type=text],input[type=tel],input[type=number],
 input[type=date],input[type=time],select,textarea{
   background:var(--bg2);border:1.5px solid var(--border);
   border-radius:var(--rs);color:var(--text);
-  font-family:var(--fb);font-size:15px;padding:10px 13px;
-  outline:none;transition:border-color .18s,box-shadow .18s;width:100%;
-  -webkit-appearance:none;
+  font-family:var(--fb);font-size:16px;
+  padding:12px 13px;outline:none;
+  transition:border-color .18s,box-shadow .18s;width:100%;
+  -webkit-appearance:none;appearance:none;
+  -webkit-tap-highlight-color:transparent;
 }
-input:focus,select:focus,textarea:focus{
-  border-color:var(--red);box-shadow:0 0 0 3px var(--red-glow);
-}
+input:focus,select:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-glow)}
 input::placeholder,textarea::placeholder{color:var(--muted)}
-select{cursor:pointer}
-select option{background:var(--bg2)}
-textarea{resize:vertical;min-height:110px}
-
-/* Phone prefix */
-.ph-wrap{display:flex}
-.ph-pre{
-  background:var(--bg3);border:1.5px solid var(--border);border-right:none;
-  border-radius:var(--rs) 0 0 var(--rs);padding:10px 13px;
-  color:var(--muted2);font-size:15px;white-space:nowrap;display:flex;align-items:center;
+select{
+  cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23706e82' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;
 }
+select option{background:var(--bg2);color:var(--text)}
+textarea{resize:vertical;min-height:100px}
+
+.ph-wrap{display:flex}
+.ph-pre{background:var(--bg3);border:1.5px solid var(--border);border-right:none;border-radius:var(--rs) 0 0 var(--rs);padding:12px 13px;color:var(--muted2);font-size:15px;white-space:nowrap;display:flex;align-items:center}
 .ph-wrap input{border-radius:0 var(--rs) var(--rs) 0;flex:1}
 
-/* File upload */
-.upload-area{
-  border:2px dashed var(--border2);border-radius:var(--rs);
-  padding:26px;text-align:center;cursor:pointer;transition:all .2s;position:relative;
-}
+.upload-area{border:2px dashed var(--border2);border-radius:var(--rs);padding:24px;text-align:center;cursor:pointer;transition:all .2s;position:relative;-webkit-tap-highlight-color:transparent}
 .upload-area:hover,.upload-area.drag{border-color:var(--red);background:rgba(232,39,43,.04)}
 .upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
-.u-ico{font-size:30px;margin-bottom:7px}
-.u-txt{font-size:13.5px;color:var(--muted2)}
+.u-ico{font-size:28px;margin-bottom:6px}
+.u-txt{font-size:13px;color:var(--muted2)}
 .u-txt strong{color:var(--red)}
 .u-hint{font-size:11px;color:var(--muted);margin-top:3px}
 
-.file-prev{
-  display:flex;align-items:center;gap:10px;margin-top:10px;
-  background:var(--bg3);border-radius:var(--rs);padding:9px 13px;
-  font-size:13px;color:var(--muted2);
-}
-.file-prev .rmv{margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;transition:color .2s}
+.file-prev{display:flex;align-items:center;gap:10px;margin-top:10px;background:var(--bg3);border-radius:var(--rs);padding:9px 13px;font-size:13px;color:var(--muted2)}
+.file-prev .rmv{margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
 .file-prev .rmv:hover{color:var(--red)}
-
 #customG{display:none}
 
-/* Submit btn */
 .btn-sub{
   width:100%;background:var(--red);color:#fff;border:none;
   border-radius:var(--rs);font-family:var(--fh);font-size:16px;font-weight:700;
-  letter-spacing:.02em;padding:14px;cursor:pointer;transition:all .2s;
+  letter-spacing:.02em;padding:15px;cursor:pointer;transition:all .2s;
   display:flex;align-items:center;justify-content:center;gap:10px;
   margin-top:6px;position:relative;overflow:hidden;
+  min-height:52px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
 }
-.btn-sub:hover{box-shadow:var(--sdw-r);transform:translateY(-1px)}
-.btn-sub:active{transform:translateY(0)}
-.btn-sub:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.btn-sub:active{opacity:.85;transform:scale(.98)}
+.btn-sub:disabled{opacity:.55;cursor:not-allowed}
 .btn-sub.ld .bt{opacity:0}
-.btn-sub .spin{
-  position:absolute;width:19px;height:19px;
-  border:2px solid rgba(255,255,255,.25);border-top-color:#fff;
-  border-radius:50%;animation:sp .65s linear infinite;display:none;
-}
+.btn-sub .spin{position:absolute;width:20px;height:20px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:sp .65s linear infinite;display:none}
 .btn-sub.ld .spin{display:block}
 @keyframes sp{to{transform:rotate(360deg)}}
 
-/* Alert */
-#alert{
-  border-radius:var(--rs);padding:13px 16px;margin-top:14px;
-  font-size:13.5px;display:none;align-items:flex-start;gap:11px;animation:fadeU .3s ease;
-}
+#alert{border-radius:var(--rs);padding:13px 16px;margin-top:14px;font-size:13.5px;display:none;align-items:flex-start;gap:11px;animation:fadeU .3s ease}
 #alert.ok{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:#6ee7b7;display:flex}
 #alert.er{background:rgba(232,39,43,.1);border:1px solid rgba(232,39,43,.3);color:#fca5a5;display:flex}
 #alert .ai{font-size:19px;flex-shrink:0;margin-top:1px}
 
-/* Info bar */
-.info-bar{
-  background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);
-  border-radius:var(--rs);padding:11px 15px;font-size:13px;color:#fcd34d;
-  display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;
-}
+.info-bar{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:var(--rs);padding:11px 15px;font-size:13px;color:#fcd34d;display:flex;gap:10px;align-items:flex-start;margin-bottom:16px}
 
-/* ═══════════════════════════════════════════
-   SEMAK NOMBOR
-═══════════════════════════════════════════ */
-.ck-row{display:flex;gap:9px}
+/* ── Semak ── */
+.ck-row{display:flex;gap:8px}
 .ck-row input{flex:1}
-.btn-ck{
-  background:var(--bg3);border:1.5px solid var(--border2);border-radius:var(--rs);
-  color:var(--text);font-family:var(--fb);font-size:13.5px;font-weight:600;
-  padding:10px 20px;cursor:pointer;white-space:nowrap;transition:all .2s;
-}
-.btn-ck:hover{border-color:var(--red);color:var(--red)}
-
+.btn-ck{background:var(--bg3);border:1.5px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:var(--fb);font-size:14px;font-weight:600;padding:12px 18px;cursor:pointer;white-space:nowrap;transition:all .2s;min-height:48px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.btn-ck:active{opacity:.7}
 .ck-res{margin-top:18px;display:none;animation:fadeU .3s ease}
 .ck-res.vis{display:block}
-.ck-badge{
-  display:flex;align-items:center;gap:12px;
-  padding:15px 18px;border-radius:var(--rs);margin-bottom:14px;font-weight:600;
-}
+.ck-badge{display:flex;align-items:center;gap:12px;padding:15px 18px;border-radius:var(--rs);margin-bottom:14px;font-weight:600}
 .ck-badge.bad{background:rgba(232,39,43,.1);border:1px solid rgba(232,39,43,.28);color:#fca5a5}
 .ck-badge.safe{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.28);color:#6ee7b7}
 .ck-badge .bi{font-size:22px}
 
-/* ═══════════════════════════════════════════
-   SENARAI
-═══════════════════════════════════════════ */
-.lc{display:flex;gap:9px;margin-bottom:14px;flex-wrap:wrap}
-.lc input{flex:1;min-width:160px}
-.lc select{width:auto;min-width:150px}
+/* ── Senarai ── */
+.lc{display:flex;gap:8px;margin-bottom:13px;flex-wrap:wrap}
+.lc input{flex:1;min-width:140px}
+.lc select{width:auto;min-width:140px}
 
-.ri{
-  background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);
-  padding:14px 16px;margin-bottom:9px;display:flex;align-items:flex-start;gap:13px;
-  transition:border-color .18s;animation:fadeU .3s ease;
-}
+/* Report item */
+.ri{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);padding:14px 15px;margin-bottom:8px;transition:border-color .18s;animation:fadeU .3s ease}
 .ri:hover{border-color:var(--border2)}
-.rn{font-family:var(--fh);font-size:14px;font-weight:700;color:var(--red);flex-shrink:0;padding-top:2px}
-.rb{flex:1;min-width:0}
-.rp{font-size:16px;font-weight:600;margin-bottom:5px;word-break:break-all}
-.rm{display:flex;flex-wrap:wrap;gap:5px;font-size:11.5px}
-.tag{
-  background:var(--bg3);border:1px solid var(--border);
-  border-radius:99px;padding:3px 10px;color:var(--muted2);
+.rid{font-size:11px;color:var(--muted);margin-bottom:5px}
+
+/* Nombor PENUH + boleh salin/panggil */
+.rp{font-size:18px;font-weight:700;margin-bottom:7px;color:var(--text);word-break:break-all;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.rp-num{color:#fff}
+.btn-copy,.btn-call{
+  font-size:11.5px;font-weight:600;border:none;cursor:pointer;
+  border-radius:99px;padding:3px 11px;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
   display:inline-flex;align-items:center;gap:4px;
 }
+.btn-copy{background:rgba(255,255,255,.08);color:var(--muted2)}
+.btn-copy:active{background:rgba(255,255,255,.15)}
+.btn-call{background:rgba(16,185,129,.12);color:#6ee7b7;border:1px solid rgba(16,185,129,.2);text-decoration:none}
+.btn-call:active{background:rgba(16,185,129,.2)}
+
+.rm{display:flex;flex-wrap:wrap;gap:5px;font-size:11.5px}
+.tag{background:var(--bg3);border:1px solid var(--border);border-radius:99px;padding:3px 10px;color:var(--muted2);display:inline-flex;align-items:center;gap:4px}
 .tag.r{border-color:rgba(232,39,43,.28);color:#fca5a5;background:rgba(232,39,43,.07)}
 .tag.a{border-color:rgba(245,158,11,.28);color:#fcd34d;background:rgba(245,158,11,.07)}
+.tag.g{border-color:rgba(16,185,129,.28);color:#6ee7b7;background:rgba(16,185,129,.07)}
 .rnotes{margin-top:7px;font-size:12.5px;color:var(--muted2);line-height:1.5;word-break:break-word}
 
 .empty{text-align:center;padding:44px 16px;color:var(--muted)}
 .empty .ei{font-size:44px;margin-bottom:10px}
 
-/* Pagination */
-.pag{display:flex;justify-content:center;gap:5px;margin-top:18px}
-.pg-btn{
-  min-width:34px;height:34px;background:var(--bg3);
-  border:1px solid var(--border);border-radius:var(--rs);
-  color:var(--muted2);font-size:13px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .18s;padding:0 9px;
-}
-.pg-btn:hover{border-color:var(--red);color:var(--red)}
+.pag{display:flex;justify-content:center;gap:5px;margin-top:16px;flex-wrap:wrap}
+.pg-btn{min-width:40px;height:40px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rs);color:var(--muted2);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s;padding:0 10px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.pg-btn:active{opacity:.7}
 .pg-btn.on{background:var(--red);border-color:var(--red);color:#fff}
 .pg-btn:disabled{opacity:.35;cursor:not-allowed}
 
-/* Skeleton */
-.sk{
-  background:linear-gradient(90deg,var(--bg3) 25%,var(--bg2) 50%,var(--bg3) 75%);
-  background-size:200% 100%;animation:shim 1.4s infinite;border-radius:var(--rs);
-}
+.sk{background:linear-gradient(90deg,var(--bg3) 25%,var(--bg2) 50%,var(--bg3) 75%);background-size:200% 100%;animation:shim 1.4s infinite;border-radius:var(--rs)}
 @keyframes shim{from{background-position:200% 0}to{background-position:-200% 0}}
 
-/* ═══════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════ */
-footer{
-  text-align:center;color:var(--muted);font-size:12px;
-  padding-top:18px;border-top:1px solid var(--border);margin-top:44px;
+/* Toast */
+.toast{
+  position:fixed;bottom:calc(20px + var(--safe-bot));left:50%;
+  transform:translateX(-50%) translateY(16px);
+  background:#1e1e2a;border:1px solid var(--border2);
+  color:var(--text);font-size:13px;padding:10px 20px;
+  border-radius:99px;opacity:0;transition:all .28s;z-index:9999;
+  white-space:nowrap;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,.5);
 }
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+footer{text-align:center;color:var(--muted);font-size:12px;padding-top:18px;border-top:1px solid var(--border);margin-top:40px}
 footer a{color:var(--muted2);text-decoration:none}
 footer a:hover{color:var(--red)}
+
+@media(min-width:600px){
+  .wrap{padding:0 24px 80px}
+  .card{padding:28px}
+  header{padding:60px 0 40px}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<!-- ──────── HEADER ──────── -->
 <header>
   <div class="live-badge"><span class="dot"></span>LIVE — Platform Awam Malaysia</div>
   <h1>Lapor<span>Scam</span>.my</h1>
@@ -341,37 +262,29 @@ footer a:hover{color:var(--red)}
   </div>
 </header>
 
-<!-- ──────── TABS ──────── -->
 <div class="tabs">
-  <button class="t-btn on" onclick="tab('report',this)">🚨 Buat Laporan</button>
-  <button class="t-btn"    onclick="tab('check',this)">🔍 Semak Nombor</button>
+  <button class="t-btn on" onclick="tab('report',this)">🚨 Lapor</button>
+  <button class="t-btn"    onclick="tab('check',this)">🔍 Semak</button>
   <button class="t-btn"    onclick="tab('list',this)">📋 Senarai</button>
 </div>
 
-<!-- ════════════════════════════════════════
-     PANEL: LAPORAN
-════════════════════════════════════════ -->
+<!-- LAPORAN -->
 <div class="panel on" id="p-report">
-  <div class="info-bar">⚠️
-    <span>Hanya laporkan scammer sebenar. Laporan palsu adalah satu kesalahan. Semua data disimpan dengan selamat.</span>
-  </div>
+  <div class="info-bar">⚠️ <span>Hanya laporkan scammer sebenar. Laporan palsu adalah kesalahan jenayah.</span></div>
   <div class="card">
     <div class="card-h"><span class="ico">📱</span>Maklumat Scammer</div>
     <div class="grid">
-
       <div class="fg full">
         <label>Nombor Telefon Scammer<span class="req">*</span></label>
         <div class="ph-wrap">
           <span class="ph-pre">🇲🇾 +60</span>
-          <input type="tel" id="phone" placeholder="11-12345678" inputmode="numeric"/>
+          <input type="tel" id="phone" placeholder="11-12345678" inputmode="tel" autocomplete="off"/>
         </div>
       </div>
-
       <div class="fg">
         <label>Jumlah Kerugian<span class="opt">(RM)</span></label>
-        <input type="number" id="loss" placeholder="cth: 5000" min="0" step="0.01"/>
+        <input type="number" id="loss" placeholder="cth: 5000" min="0" step="0.01" inputmode="decimal"/>
       </div>
-
       <div class="fg">
         <label>Jenis Scam<span class="req">*</span></label>
         <select id="stype" onchange="chgType()">
@@ -388,85 +301,67 @@ footer a:hover{color:var(--red)}
           <option value="__custom__">✏️ Lain-lain (Nyatakan sendiri)</option>
         </select>
       </div>
-
       <div class="fg full" id="customG">
         <label>Nyatakan Jenis Scam<span class="req">*</span></label>
         <input type="text" id="customT" placeholder="cth: SIM Swap, Kripto Palsu..."/>
       </div>
-
       <div class="fg">
         <label>Tarikh Kejadian<span class="opt">(pilihan)</span></label>
         <input type="date" id="idate"/>
       </div>
-
       <div class="fg">
         <label>Masa Kejadian<span class="opt">(pilihan)</span></label>
         <input type="time" id="itime"/>
       </div>
-
       <div class="fg full">
         <label>Bukti Bergambar / Dokumen<span class="opt">(pilihan, max 10MB)</span></label>
         <div class="upload-area" id="uArea">
           <input type="file" id="evFile" accept="image/*,.pdf" onchange="selFile(this)"/>
           <div class="u-ico">📎</div>
-          <div class="u-txt"><strong>Klik untuk pilih</strong> atau seret fail ke sini</div>
-          <div class="u-hint">JPG · PNG · GIF · WEBP · PDF — Sehingga 10MB</div>
+          <div class="u-txt"><strong>Klik untuk pilih</strong> atau seret ke sini</div>
+          <div class="u-hint">JPG · PNG · GIF · WEBP · PDF — Max 10MB</div>
         </div>
         <div class="file-prev" id="fPrev" style="display:none">
-          <span id="fIco">📄</span><span id="fName">—</span>
+          <span id="fIco">📄</span>
+          <span id="fName" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</span>
           <button class="rmv" onclick="rmFile()">✕</button>
         </div>
       </div>
-
       <div class="fg full">
         <label>Nota Tambahan / Kronologi Kejadian<span class="opt">(pilihan)</span></label>
         <textarea id="notes" placeholder="Ceritakan bagaimana scammer menghubungi anda, kaedah yang digunakan, kronologi kejadian..."></textarea>
       </div>
     </div>
-
     <button class="btn-sub" id="subBtn" onclick="doSubmit()">
       <div class="spin"></div>
       <span class="bt">🚨 Hantar Laporan Sekarang</span>
     </button>
-    <div id="alert">
-      <span class="ai" id="aIco">✅</span>
-      <span id="aMsg"></span>
-    </div>
+    <div id="alert"><span class="ai" id="aIco">✅</span><span id="aMsg"></span></div>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════
-     PANEL: SEMAK
-════════════════════════════════════════ -->
+<!-- SEMAK -->
 <div class="panel" id="p-check">
   <div class="card">
     <div class="card-h"><span class="ico">🔍</span>Semak Nombor Telefon</div>
-    <p style="color:var(--muted2);font-size:14px;margin-bottom:16px">
-      Masukkan nombor yang ingin disemak — kami akan cari dalam database laporan.
-    </p>
+    <p style="color:var(--muted2);font-size:14px;margin-bottom:16px">Masukkan nombor yang ingin disemak — kami cari dalam database laporan awam.</p>
     <div class="ck-row">
-      <input type="tel" id="ckPhone" placeholder="cth: 01112345678" inputmode="numeric"
-             onkeydown="if(event.key==='Enter')doCheck()"/>
+      <input type="tel" id="ckPhone" placeholder="cth: 01112345678" inputmode="tel" onkeydown="if(event.key==='Enter')doCheck()"/>
       <button class="btn-ck" onclick="doCheck()">Semak</button>
     </div>
     <div class="ck-res" id="ckRes">
-      <div class="ck-badge" id="ckBadge">
-        <span class="bi" id="ckIco"></span>
-        <div id="ckTxt"></div>
-      </div>
+      <div class="ck-badge" id="ckBadge"><span class="bi" id="ckIco"></span><div id="ckTxt"></div></div>
       <div id="ckList"></div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════
-     PANEL: SENARAI
-════════════════════════════════════════ -->
+<!-- SENARAI -->
 <div class="panel" id="p-list">
   <div class="card">
     <div class="card-h"><span class="ico">📋</span>Semua Laporan Scammer</div>
     <div class="lc">
-      <input type="tel" id="srch" placeholder="🔎 Cari nombor..." inputmode="numeric" oninput="debS()"/>
+      <input type="tel" id="srch" placeholder="🔎 Cari nombor..." inputmode="tel" oninput="debS()"/>
       <select id="ftype" onchange="loadList(1)">
         <option value="all">Semua Jenis</option>
         <option>🏦 Akaun Scam (Macam-macam)</option>
@@ -486,231 +381,238 @@ footer a:hover{color:var(--red)}
   </div>
 </div>
 
-<!-- ──────── FOOTER ──────── -->
 <footer>
   <p>Dibina dengan ❤️ untuk keselamatan masyarakat Malaysia &nbsp;·&nbsp;
-     <a href="#" onclick="tab('report',document.querySelectorAll('.t-btn')[0])">Buat Laporan</a>
+     <a href="#" onclick="tab('report',document.querySelectorAll('.t-btn')[0]);return false">Buat Laporan</a>
   </p>
   <p style="margin-top:5px">Data disimpan dalam SQLite — tiada data dijual atau dikongsi.</p>
 </footer>
-</div><!-- /wrap -->
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-/* ════════════════════════════════════════════
-   JAVASCRIPT
-════════════════════════════════════════════ */
 let _srchT = null;
 
-/* ── Tab switch ─────────────────────────── */
 function tab(name, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
   document.querySelectorAll('.t-btn').forEach(b => b.classList.remove('on'));
   document.getElementById('p-' + name).classList.add('on');
   el.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
   if (name === 'list') loadList(1);
   if (name === 'report') loadStats();
 }
 
-/* ── Jenis custom ───────────────────────── */
 function chgType() {
   const v = document.getElementById('stype').value;
-  document.getElementById('customG').style.display =
-    v === '__custom__' ? 'flex' : 'none';
+  document.getElementById('customG').style.display = v === '__custom__' ? 'flex' : 'none';
 }
 
-/* ── File upload ────────────────────────── */
 const ua = document.getElementById('uArea');
-ua.addEventListener('dragover',  e => { e.preventDefault(); ua.classList.add('drag'); });
-ua.addEventListener('dragleave', () => ua.classList.remove('drag'));
-ua.addEventListener('drop', e => {
-  e.preventDefault(); ua.classList.remove('drag');
-  const f = e.dataTransfer.files[0];
-  if (f) { document.getElementById('evFile').files = e.dataTransfer.files; showPrev(f); }
+ua.addEventListener('dragover',  e=>{e.preventDefault();ua.classList.add('drag')});
+ua.addEventListener('dragleave', ()=>ua.classList.remove('drag'));
+ua.addEventListener('drop', e=>{
+  e.preventDefault();ua.classList.remove('drag');
+  const f=e.dataTransfer.files[0];
+  if(f){document.getElementById('evFile').files=e.dataTransfer.files;showPrev(f)}
 });
-function selFile(i) { if (i.files[0]) showPrev(i.files[0]); }
-function showPrev(f) {
-  document.getElementById('fIco').textContent = f.type.startsWith('image/') ? '🖼️' : '📄';
-  document.getElementById('fName').textContent = f.name + ' (' + (f.size/1024/1024).toFixed(2) + ' MB)';
-  document.getElementById('fPrev').style.display = 'flex';
-  ua.style.display = 'none';
+function selFile(i){if(i.files[0])showPrev(i.files[0])}
+function showPrev(f){
+  document.getElementById('fIco').textContent=f.type.startsWith('image/')?'🖼️':'📄';
+  document.getElementById('fName').textContent=f.name+' ('+(f.size/1024/1024).toFixed(2)+'MB)';
+  document.getElementById('fPrev').style.display='flex';
+  ua.style.display='none';
 }
-function rmFile() {
-  document.getElementById('evFile').value = '';
-  document.getElementById('fPrev').style.display = 'none';
-  ua.style.display = 'block';
+function rmFile(){
+  document.getElementById('evFile').value='';
+  document.getElementById('fPrev').style.display='none';
+  ua.style.display='block';
 }
 
-/* ── Hantar laporan ─────────────────────── */
 async function doSubmit() {
-  const btn   = document.getElementById('subBtn');
-  const al    = document.getElementById('alert');
-  al.className = ''; al.style.display = 'none';
+  const btn=document.getElementById('subBtn');
+  const al=document.getElementById('alert');
+  al.className='';al.style.display='none';
 
-  const phone  = document.getElementById('phone').value.trim();
-  const stype  = document.getElementById('stype').value;
-  const ctype  = document.getElementById('customT').value.trim();
-  const loss   = document.getElementById('loss').value;
-  const idate  = document.getElementById('idate').value;
-  const itime  = document.getElementById('itime').value;
-  const notes  = document.getElementById('notes').value.trim();
-  const file   = document.getElementById('evFile').files[0];
+  const phone=document.getElementById('phone').value.trim();
+  const stype=document.getElementById('stype').value;
+  const ctype=document.getElementById('customT').value.trim();
+  const loss=document.getElementById('loss').value;
+  const idate=document.getElementById('idate').value;
+  const itime=document.getElementById('itime').value;
+  const notes=document.getElementById('notes').value.trim();
+  const file=document.getElementById('evFile').files[0];
 
-  if (!phone) return showAl('er', '⚠️ Nombor telefon wajib diisi!');
-  if (!stype) return showAl('er', '⚠️ Sila pilih jenis scam!');
-  if (stype === '__custom__' && !ctype) return showAl('er', '⚠️ Sila nyatakan jenis scam!');
+  if(!phone) return showAl('er','⚠️ Nombor telefon wajib diisi!');
+  if(!stype) return showAl('er','⚠️ Sila pilih jenis scam!');
+  if(stype==='__custom__'&&!ctype) return showAl('er','⚠️ Sila nyatakan jenis scam!');
 
-  const fd = new FormData();
-  fd.append('phone', phone);
-  fd.append('scam_type', stype === '__custom__' ? 'Lain-lain (Custom)' : stype);
-  if (ctype)  fd.append('custom_type', ctype);
-  if (loss)   fd.append('loss_amount', loss);
-  if (idate)  fd.append('incident_date', idate);
-  if (itime)  fd.append('incident_time', itime);
-  if (notes)  fd.append('notes', notes);
-  if (file)   fd.append('evidence', file);
+  const fd=new FormData();
+  fd.append('phone',phone);
+  fd.append('scam_type',stype==='__custom__'?'Lain-lain (Custom)':stype);
+  if(ctype)  fd.append('custom_type',ctype);
+  if(loss)   fd.append('loss_amount',loss);
+  if(idate)  fd.append('incident_date',idate);
+  if(itime)  fd.append('incident_time',itime);
+  if(notes)  fd.append('notes',notes);
+  if(file)   fd.append('evidence',file);
 
-  btn.disabled = true; btn.classList.add('ld');
-  try {
-    const r = await fetch('/api/report', { method: 'POST', body: fd });
-    const d = await r.json();
-    if (d.success) { showAl('ok', `✅ ${d.message} (ID #${d.report_id})`); resetF(); loadStats(); }
-    else             showAl('er', '❌ ' + d.message);
-  } catch { showAl('er', '❌ Gagal sambung ke server. Pastikan server berjalan.'); }
-  finally { btn.disabled = false; btn.classList.remove('ld'); }
+  btn.disabled=true;btn.classList.add('ld');
+  try{
+    const r=await fetch('/api/report',{method:'POST',body:fd});
+    const d=await r.json();
+    if(d.success){showAl('ok',`✅ ${d.message} (ID #${d.report_id})`);resetF();loadStats();}
+    else showAl('er','❌ '+d.message);
+  }catch{showAl('er','❌ Gagal sambung ke server.');}
+  finally{btn.disabled=false;btn.classList.remove('ld')}
 }
 
-function showAl(cls, msg) {
-  const al = document.getElementById('alert');
-  document.getElementById('aMsg').textContent = msg;
-  document.getElementById('aIco').textContent = cls === 'ok' ? '✅' : '❌';
-  al.className = cls;
-  al.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+function showAl(cls,msg){
+  const al=document.getElementById('alert');
+  document.getElementById('aMsg').textContent=msg;
+  document.getElementById('aIco').textContent=cls==='ok'?'✅':'❌';
+  al.className=cls;
+  al.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-function resetF() {
-  ['phone','loss','idate','itime','notes','customT'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-  document.getElementById('stype').value = '';
-  document.getElementById('customG').style.display = 'none';
+function resetF(){
+  ['phone','loss','idate','itime','notes','customT'].forEach(id=>{document.getElementById(id).value=''});
+  document.getElementById('stype').value='';
+  document.getElementById('customG').style.display='none';
   rmFile();
 }
 
-/* ── Semak nombor ───────────────────────── */
-async function doCheck() {
-  const ph = document.getElementById('ckPhone').value.trim();
-  if (!ph) return;
-  const res = document.getElementById('ckRes');
-  res.className = 'ck-res';
-  try {
-    const d = await (await fetch('/api/check/' + encodeURIComponent(ph))).json();
-    const badge = document.getElementById('ckBadge');
-    const ico   = document.getElementById('ckIco');
-    const txt   = document.getElementById('ckTxt');
-    const lst   = document.getElementById('ckList');
-
-    if (d.found) {
-      badge.className = 'ck-badge bad'; ico.textContent = '🚨';
-      txt.innerHTML = `<strong>SCAMMER DISAHKAN!</strong><br>Dilaporkan <strong>${d.count}</strong> kali.`;
-      lst.innerHTML = d.reports.map(r => `
+async function doCheck(){
+  const ph=document.getElementById('ckPhone').value.trim();
+  if(!ph) return;
+  const res=document.getElementById('ckRes');
+  res.className='ck-res';
+  try{
+    const d=await(await fetch('/api/check/'+encodeURIComponent(ph))).json();
+    const badge=document.getElementById('ckBadge');
+    const ico=document.getElementById('ckIco');
+    const txt=document.getElementById('ckTxt');
+    const lst=document.getElementById('ckList');
+    if(d.found){
+      badge.className='ck-badge bad';ico.textContent='🚨';
+      txt.innerHTML=`<strong>SCAMMER DISAHKAN!</strong><br>Dilaporkan <strong>${d.count}</strong> kali.`;
+      lst.innerHTML=d.reports.map(r=>`
         <div class="ri">
-          <div class="rb">
-            <div class="rm">
-              <span class="tag r">🏷️ ${esc(r.scam_type)}</span>
-              ${r.loss_amount > 0 ? `<span class="tag a">💸 RM ${Number(r.loss_amount).toLocaleString()}</span>` : ''}
-              <span class="tag">🕒 ${fmtDate(r.created_at)}</span>
-            </div>
-          </div>
-        </div>`).join('');
-    } else {
-      badge.className = 'ck-badge safe'; ico.textContent = '✅';
-      txt.innerHTML = '<strong>Tiada Rekod</strong><br>Nombor ini belum pernah dilaporkan.';
-      lst.innerHTML = '';
-    }
-    res.classList.add('vis');
-  } catch { alert('Gagal sambung ke server.'); }
-}
-
-/* ── Senarai laporan ────────────────────── */
-async function loadList(page = 1) {
-  const srch  = document.getElementById('srch').value.trim();
-  const ftype = document.getElementById('ftype').value;
-  const rl    = document.getElementById('rList');
-  const pg    = document.getElementById('pag');
-
-  rl.innerHTML = '<div class="sk" style="height:68px;margin-bottom:9px"></div>'.repeat(4);
-  pg.innerHTML = '';
-
-  const p = new URLSearchParams({ page, limit: 15 });
-  if (srch)            p.set('search', srch);
-  if (ftype !== 'all') p.set('type', ftype === '__custom__' ? 'Lain-lain (Custom)' : ftype);
-
-  try {
-    const d = await (await fetch('/api/reports?' + p)).json();
-    if (!d.data?.length) {
-      rl.innerHTML = '<div class="empty"><div class="ei">🔍</div><p>Tiada laporan ditemui.</p></div>';
-      return;
-    }
-    rl.innerHTML = d.data.map(r => `
-      <div class="ri">
-        <div class="rn">#${r.id}</div>
-        <div class="rb">
-          <div class="rp">${maskPh(r.phone)}</div>
+          <div class="rp"><span class="rp-num">📱 ${esc(r.scam_type)}</span></div>
           <div class="rm">
-            <span class="tag r">🏷️ ${esc(r.scam_type)}${r.custom_type ? ': ' + esc(r.custom_type) : ''}</span>
-            ${r.loss_amount > 0 ? `<span class="tag a">💸 RM ${Number(r.loss_amount).toLocaleString()}</span>` : ''}
-            ${r.has_evidence  ? '<span class="tag">📎 Ada Bukti</span>' : ''}
+            ${r.loss_amount>0?`<span class="tag a">💸 RM ${Number(r.loss_amount).toLocaleString()}</span>`:''}
             <span class="tag">🕒 ${fmtDate(r.created_at)}</span>
           </div>
-          ${r.notes ? `<div class="rnotes">${esc(r.notes).substring(0,200)}${r.notes.length>200?'…':''}</div>` : ''}
-        </div>
-      </div>`).join('');
-
-    const tp = Math.ceil(d.total / 15);
-    if (tp > 1) {
-      let h = '';
-      if (page > 1) h += `<button class="pg-btn" onclick="loadList(${page-1})">‹</button>`;
-      for (let i = Math.max(1,page-2); i <= Math.min(tp,page+2); i++)
-        h += `<button class="pg-btn ${i===page?'on':''}" onclick="loadList(${i})">${i}</button>`;
-      if (page < tp) h += `<button class="pg-btn" onclick="loadList(${page+1})">›</button>`;
-      pg.innerHTML = h;
+        </div>`).join('');
+    }else{
+      badge.className='ck-badge safe';ico.textContent='✅';
+      txt.innerHTML='<strong>Tiada Rekod</strong><br>Nombor ini belum pernah dilaporkan.';
+      lst.innerHTML='';
     }
-  } catch {
-    rl.innerHTML = '<div class="empty"><div class="ei">⚠️</div><p>Gagal muatkan laporan. Pastikan server aktif.</p></div>';
+    res.classList.add('vis');
+  }catch{showToast('Gagal sambung ke server')}
+}
+
+async function loadList(page=1){
+  const srch=document.getElementById('srch').value.trim();
+  const ftype=document.getElementById('ftype').value;
+  const rl=document.getElementById('rList');
+  const pg=document.getElementById('pag');
+
+  rl.innerHTML='<div class="sk" style="height:80px;margin-bottom:8px"></div>'.repeat(4);
+  pg.innerHTML='';
+
+  const p=new URLSearchParams({page,limit:15});
+  if(srch) p.set('search',srch);
+  if(ftype!=='all') p.set('type',ftype==='__custom__'?'Lain-lain (Custom)':ftype);
+
+  try{
+    const d=await(await fetch('/api/reports?'+p)).json();
+    if(!d.data?.length){
+      rl.innerHTML='<div class="empty"><div class="ei">🔍</div><p>Tiada laporan ditemui.</p></div>';
+      return;
+    }
+
+    rl.innerHTML=d.data.map(r=>{
+      // Nombor telefon PENUH — tidak disembunyikan
+      const phoneRaw = r.phone;
+      const phoneClean = phoneRaw.replace(/\D/g,'');
+      const callNum = phoneClean.startsWith('60') ? '+'+phoneClean : '+60'+phoneClean;
+
+      return `
+      <div class="ri">
+        <div class="rid">#${r.id} &nbsp;·&nbsp; ${fmtDate(r.created_at)}</div>
+        <div class="rp">
+          <span class="rp-num">📱 ${esc(phoneRaw)}</span>
+          <button class="btn-copy" onclick="copyPhone('${phoneRaw}')">📋 Salin</button>
+          <a class="btn-call" href="tel:${callNum}">📞 Panggil</a>
+        </div>
+        <div class="rm">
+          <span class="tag r">🏷️ ${esc(r.scam_type)}${r.custom_type?': '+esc(r.custom_type):''}</span>
+          ${r.loss_amount>0?`<span class="tag a">💸 RM ${Number(r.loss_amount).toLocaleString()}</span>`:''}
+          ${r.has_evidence?'<span class="tag g">📎 Ada Bukti</span>':''}
+        </div>
+        ${r.notes?`<div class="rnotes">${esc(r.notes).substring(0,200)}${r.notes.length>200?'…':''}</div>`:''}
+      </div>`;
+    }).join('');
+
+    const tp=Math.ceil(d.total/15);
+    if(tp>1){
+      let h='';
+      if(page>1) h+=`<button class="pg-btn" onclick="loadList(${page-1})">‹</button>`;
+      for(let i=Math.max(1,page-2);i<=Math.min(tp,page+2);i++)
+        h+=`<button class="pg-btn ${i===page?'on':''}" onclick="loadList(${i})">${i}</button>`;
+      if(page<tp) h+=`<button class="pg-btn" onclick="loadList(${page+1})">›</button>`;
+      pg.innerHTML=h;
+    }
+  }catch{
+    rl.innerHTML='<div class="empty"><div class="ei">⚠️</div><p>Gagal muatkan laporan. Pastikan server aktif.</p></div>';
   }
 }
 
-/* ── Stats ──────────────────────────────── */
-async function loadStats() {
-  try {
-    const d = await (await fetch('/api/stats')).json();
-    if (d.success) {
-      document.getElementById('sRep').textContent  = Number(d.data.total_reports).toLocaleString();
-      document.getElementById('sLoss').textContent = Number(d.data.total_loss).toLocaleString();
-      document.getElementById('sNum').textContent  = Number(d.data.unique_numbers).toLocaleString();
+async function loadStats(){
+  try{
+    const d=await(await fetch('/api/stats')).json();
+    if(d.success){
+      document.getElementById('sRep').textContent=Number(d.data.total_reports).toLocaleString();
+      document.getElementById('sLoss').textContent=Number(d.data.total_loss).toLocaleString();
+      document.getElementById('sNum').textContent=Number(d.data.unique_numbers).toLocaleString();
     }
-  } catch {}
+  }catch{}
 }
 
-/* ── Helpers ────────────────────────────── */
-function debS() { clearTimeout(_srchT); _srchT = setTimeout(() => loadList(1), 400); }
-function fmtDate(s) {
-  if (!s) return '—';
-  const d = new Date(s);
+function copyPhone(phone){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(phone).then(()=>showToast('📋 Disalin: '+phone));
+  }else{
+    // Fallback Android lama
+    const el=document.createElement('input');
+    el.value=phone;document.body.appendChild(el);
+    el.select();el.setSelectionRange(0,99999);
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    showToast('📋 Disalin: '+phone);
+  }
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+function debS(){clearTimeout(_srchT);_srchT=setTimeout(()=>loadList(1),400)}
+function fmtDate(s){
+  if(!s) return '—';
+  const d=new Date(s);
   return d.toLocaleDateString('ms-MY',{day:'2-digit',month:'short',year:'numeric'})
-       + ' ' + d.toLocaleTimeString('ms-MY',{hour:'2-digit',minute:'2-digit'});
+       +' '+d.toLocaleTimeString('ms-MY',{hour:'2-digit',minute:'2-digit'});
 }
-function maskPh(p) {
-  if (!p) return '—';
-  const dg = p.replace(/\D/g,'');
-  return dg.length < 6 ? p : dg.substring(0,4) + '****' + dg.slice(-2);
-}
-function esc(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 
-/* ── Init ───────────────────────────────── */
 loadStats();
 </script>
 </body>
 </html>
+
